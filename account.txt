@@ -1,0 +1,14 @@
+Teacher :
+ID : 1
+Email: phi1@gmail.com
+password: phi1111
+
+ID : 2
+Email: phi2@gmail.com
+password: phi2222
+
+
+Admin: 
+ID: 1
+Email: admin@gmail.com
+password: admin

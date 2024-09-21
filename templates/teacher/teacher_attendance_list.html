@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Teacher Panel</title>
+    <link
+      href="{{ url_for('static', filename='styles/admin.css') }}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="{{ url_for('static', filename='styles/attendance.css') }}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      {% include 'components/sidebar/sidebar_teacher.html' %}
+      <section class="attendance">
+        <div class="attendance-list">
+          <h1>Today's Attendance</h1>
+          <hr />
+          <button style="padding: 10px" onclick="exportToExcel()">
+            Export to Excel
+          </button>
+          <table class="table" id="attendance-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Major</th>
+                <th>Total Attendance</th>
+                <th>Last Attendance Time</th>
+                <th>Year</th>
+              </tr>
+            </thead>
+            {% for student in data %}
+            <tbody>
+              <tr>
+                <td>{{ student['id'] }}</td>
+                <td>{{ student['name'] }}</td>
+                <td>{{ student['major'] }}</td>
+                <td>{{ student['total_attendance'] }}</td>
+                <td>{{ student['last_attendance_time'] }}</td>
+                <td>{{ student['year'] }}</td>
+              </tr>
+            </tbody>
+            {% endfor %}
+          </table>
+        </div>
+      </section>
+      <form method='POST'>
+        <button
+          onclick="submitFormWithPost()"
+          class="btn_teacher"
+          name="btn_teacher"
+          value="KEY_2"
+        >
+          Clear Above Attendance List
+        </button>
+      </form>
+    </div>
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js"></script>
+    <script>
+      function exportToExcel() {
+        const table = document.getElementById("attendance-table");
+        const workbook = XLSX.utils.table_to_book(table);
+        XLSX.writeFile(workbook, "attendance.xlsx");
+      }
+
+      function submitFormWithPost() {
+        var form = document.createElement('form');
+        form.method = 'POST';
+        form.action = '/teacher';
+        document.body.appendChild(form);
+        form.submit();
+    }
+    </script>
+  </body>
+</html>

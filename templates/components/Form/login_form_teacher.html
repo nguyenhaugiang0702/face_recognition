@@ -1,0 +1,26 @@
+<form action="/teacher_login" method="POST">
+  <div class="txt_field">
+    <input type="text" name="id_number" required />
+    <span></span>
+    <label>ID Number</label>
+  </div>
+  <div class="txt_field">
+    <input type="email" name="email" required />
+    <span></span>
+    <label>Email</label>
+  </div>
+  <div class="txt_field">
+    <input type="password" name="password" required />
+    <span></span>
+    <label>Password</label>
+  </div>
+  <button type="submit" class="btn_login">Login</button>
+  <div class="text_bottom">
+    Forgot Password. Please contact your teacher or IT Team.
+    <br />
+  </div>
+  <div class="text_bottom">
+    {% if data %} {{ data }} {% endif %}
+    <br />
+  </div>
+</form>

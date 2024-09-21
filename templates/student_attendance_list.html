@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Today's Attendance</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css"
+    />
+    <link
+      href="{{ url_for('static', filename='styles/admin.css') }}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+    href="{{ url_for('static', filename='styles/attendance.css') }}"
+    rel="stylesheet"
+    type="text/css"
+  />
+  </head>
+  <body>
+    <div class="container">
+      <section class="attendance">
+        <div class="attendance-list">
+          <button class="btn_home" onclick="window.location.href='/'">
+            Home
+          </button>
+          <h1 class="text-center">Today's Attendance</h1>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Major</th>
+                <th>Total Attendance</th>
+                <th>Last Attendance Time</th>
+                <th>Year</th>
+              </tr>
+            </thead>
+            {% for student in data %}
+            <tbody>
+              <tr>
+                <td>{{ student['id'] }}</td>
+                <td>{{ student['name'] }}</td>
+                <td>{{ student['major'] }}</td>
+                <td>{{ student['total_attendance'] }}</td>
+                <td>{{ student['last_attendance_time'] }}</td>
+                <td>{{ student['year'] }}</td>
+              </tr>
+            </tbody>
+            {% endfor %}
+          </table>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>

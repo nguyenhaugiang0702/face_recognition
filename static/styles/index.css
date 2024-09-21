@@ -1,0 +1,38 @@
+* {
+  margin: 5px 5px;
+  padding: 0px 5px;
+}
+
+body {
+  background-image: url("website background.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+img {
+  width: 75%;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.btn_student,
+.btn_admin,
+.btn_adttendance_list {
+  border-radius: 10px;
+  padding: 20px 40px;
+  font-size: 20px;
+  font-weight: bold;
+  background-color: white;
+  color: black;
+  transition-duration: 0.4s;
+}
+
+.btn_student:hover,
+.btn_admin:hover,
+.btn_adttendance_list:hover {
+  background-color: #6f4ffe;
+  color: white;
+}

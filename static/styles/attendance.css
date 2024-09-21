@@ -1,0 +1,126 @@
+.attendance {
+    margin: auto;
+    text-transform: capitalize;
+}
+
+.attendance-list {
+    width: 100%;
+    padding: 20px;
+    margin: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+}
+
+.table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 15px;
+    min-width: 100%;
+    overflow: hidden;
+    border-radius: 5px 5px 0 0;
+}
+
+table thead tr {
+    color: #fff;
+    background: #34af6d;
+    text-align: left;
+    font-weight: bold;
+}
+
+.table th,
+.table td {
+    padding: 12px 15px;
+}
+
+.table tbody tr {
+    border-bottom: 1px solid #ddd;
+}
+
+.table tbody tr:nth-of-type(odd) {
+    background: #f3f3f3;
+}
+
+.table tbody tr.active {
+    font-weight: bold;
+    color: #4ad489;
+}
+
+.table tbody tr:last-of-type {
+    border-bottom: 2px solid #4ad489;
+}
+
+.table button {
+    padding: 6px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    background: transparent;
+    border: 1px solid #4ad489;
+}
+
+.table button:hover {
+    background: #4ad489;
+    color: #fff;
+    transition: 0.5rem;
+}
+
+/* .container .btn_student {
+    border-radius: 10px;
+    padding: 7px;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: white;
+    color: black;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border: 1px solid #4ad489;
+    margin: 10px;
+    position: absolute;
+    margin: auto;
+    left: 30%;
+    width: auto;
+    bottom: 10%;
+} */
+
+.container .btn_teacher {
+    border-radius: 10px;
+    padding: 7px;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: white;
+    color: black;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border: 1px solid #4ad489;
+    margin: 10px;
+    position: absolute;
+    margin: auto;
+    left: 45%;
+    width: auto;
+    bottom: 10%;
+}
+
+.container button:hover {
+    background: #4ad489;
+    color: #fff;
+    transition: 0.5s;
+}
+
+.btn_home {
+    padding: 4px;
+    font-size: 10px;
+    background-color: white;
+    font-weight: bold;
+    color: black;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border: 1px solid #4ad489;
+    border-radius: 5px;
+    margin: 1px;
+}
+
+.btn_home:hover {
+    background: #4ad489;
+    color: #fff;
+    transition: 0.5s;
+}

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Panel</title>
+    <link
+      href="{{ url_for('static', filename='styles/admin.css') }}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    
+  </head>
+  <body>
+    <div class="container">
+      {% include 'components/sidebar/sidebar_admin.html' %}
+
+      <!-- ######################################################################################################################### -->
+
+      <section class="main">
+        <div class="main-top">
+          <h1>Students Enrolled for Year 2025</h1>
+        </div>
+        <button onclick='addStudent()' style="padding: 10px 20px; margin-left: 10px; cursor: pointer">Add</button>
+        {% for student in data %}
+          {% if student and student['id'] %}
+            <div class="users">
+              <div class="card">
+                <img src="{{ url_for('static', filename='Files/Images/students/'+ student['id']+'.jpg') }}" alt="student dp" />
+                <h4 >ID : {{ student['id'] }}</h4>
+                <h4 >{{ student['name'] }}</h4>
+                <p>{{ student['major'] }}</p>
+                <div class="per">
+                  <table>
+                    <tr>
+                      <td><span>{{ student['total_attendance'] }}</span></td>
+                      <td><span>{{ student['year'] }}</span></td>
+                    </tr>
+                    <tr>
+                      <td>Total Attendance</td>
+                      <td>Year</td>
+                    </tr>
+                  </table>
+                </div>
+                <form method="POST" action="/admin/edit_user">
+                  <button
+                  class="edit_student"
+                  type="submit"
+                  name="edit_student"
+                  value="{{ student['id'] }}"
+                  >View More</button>
+                </form>
+              </div>            
+            </div>
+          {% endif %}
+        {% endfor %}
+        <!-- ######################################################################################################################### --> 
+      </section>
+    </div>
+    <script>
+      function addStudent(){
+        window.location.href='/admin/add_user'
+      }
+    </script>
+  </body>
+</html>

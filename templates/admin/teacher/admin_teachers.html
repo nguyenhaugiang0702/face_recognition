@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Panel</title>
+    <link
+      href="{{ url_for('static', filename='styles/admin.css') }}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    
+  </head>
+  <body>
+    <div class="container">
+      {% include 'components/sidebar/sidebar_admin.html' %}
+
+      <!-- ######################################################################################################################### -->
+
+      <section class="main">
+        <div class="main-top">
+          <h1>Teachers Enrolled for Year 2025</h1>
+        </div>
+        <button onclick='addTeacher()' style="padding: 10px 20px; margin-left: 10px; cursor: pointer">Add</button>
+        {% for teacher in data %}
+          {% if teacher and teacher['id'] %}
+            <div class="users">
+              <div class="card">
+                <img src="{{ url_for('static', filename='Files/Images/teachers/'+ teacher['id']+'.jpg') }}" alt="teacher dp" />
+                <h4 >ID : {{ teacher['id'] }}</h4>
+                <h4 >{{ teacher['name'] }}</h4>
+                <div>DOB: {{ teacher['dob'] }}</div>
+                <div>Phone: {{ teacher['phone'] }}</div>
+                <form method="POST" action="/admin/edit_teacher">
+                  <button
+                  class="edit_student"
+                  type="submit"
+                  name="edit_teacher"
+                  value="{{ teacher['id'] }}"
+                  >View More</button>
+                </form>
+              </div>            
+            </div>
+          {% endif %}
+        {% endfor %}
+        <!-- ######################################################################################################################### --> 
+      </section>
+    </div>
+    <script>
+      function addTeacher(){
+        window.location.href='/admin/add_teacher'
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Face Recognition System</title>
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css"
+    />
+    <!-- Font Awesome CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link
+      href="{{ url_for('static', filename='styles/student.css') }}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="{{ url_for('static', filename='styles/loading.css') }}"
+      rel="stylesheet"
+      type="text/css"
+    />
+  </head>
+  <body>
+    <h1>Edit Profile</h1>
+    <div class="student-profile py-4">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="card shadow-sm">
+              <div class="card-header bg-transparent text-center">
+                <img
+                  class="profile_img"
+                  src="{{ url_for('static', filename='Files/Images/teachers/'+ data.teacherInfo.id +'.jpg') }}"
+                  alt="student dp"
+                />
+                <h3 contenteditable id="name">{{ data.teacherInfo.name }}</h3>
+              </div>
+              <div class="card-body">
+                <p class="mb-0">
+                  <strong class="pr-1">Student ID:</strong
+                  ><span id="id">{{ data.teacherInfo.id }}</span
+                  >
+                </p>
+                <p class="mb-0">
+                  <strong class="pr-1">Date of Birth:</strong>
+                  <span contenteditable id="dob">{{ data.teacherInfo.dob }}</span
+                  >
+                </p>
+                <p class="mb-0">
+                  <strong class="pr-1">Address:</strong>
+                  <span contenteditable id="address">{{ data.teacherInfo.address }}</span
+                  >
+                </p>
+                <p class="mb-0">
+                  <strong class="pr-1">Phone Number:</strong>
+                  <span contenteditable id="phone">{{ data.teacherInfo.phone }}</span
+                  >
+                </p>
+                <p class="mb-0">
+                  <strong class="pr-1">Email:</strong>
+                  <span contenteditable id="email">{{ data.teacherInfo.email }}</span
+                  >
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <button class="btn_save" onclick="saveEdits()">Save Edits</button>
+          <span></span>
+          <button class="delete btn_delete" onclick="confirmDelete()">
+            Delete
+          </button>
+          <span></span>
+          <button class="btn_back" onclick="window.location.href='/admin'">
+            Back
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- Overlay và biểu tượng loading -->
+    <div id="overlay">
+      <div class="loader"></div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script type="text/javascript">
+      function saveEdits() {
+        var editData = {
+          name: $("#name").html(),
+          id: $("#id").html(),
+          dob: $("#dob").html(),
+          address: $("#address").html(),
+          phone: $("#phone").html(),
+          email: $("#email").html(),
+        };
+
+        var data = JSON.stringify(editData);
+
+        $.ajax({
+          url: "/admin/save_changes_teacher",
+          type: "POST",
+          contentType: "application/json",
+          data: data,
+          success: function () {
+            alert("Changes saved successfully!");
+            window.location.href = "/admin/teachers";
+          },
+          error: function (xhr, status, error) {
+            var errorMessage = xhr.responseJSON.message;
+            if (errorMessage) {
+                alert(errorMessage);
+            } else {
+                alert("Error occurred while sending data!");
+            }
+            window.location.reload();
+          },
+        });
+      }
+
+      function confirmDelete() {
+        var result = confirm("Are you sure you want to delete this user?");
+        if (result) {
+          delete_user();
+        }
+      }
+
+      function delete_user() {
+        var teacherId = $("#id").html();
+
+        var data = JSON.stringify(teacherId);
+
+        $.ajax({
+          url: "/admin/delete_teacher",
+          type: "POST",
+          contentType: "application/json",
+          data: data,
+          beforeSend: function () {
+            $("#overlay").css("display", "flex");
+          },
+          success: function () {
+            alert("Teacher deleted successfully!");
+            window.location.href = "/admin/teachers";
+          },
+          error: function (xhr, status, message) {
+            $("#overlay").hide();
+            alert("Error occurred while deleting Teacher!");
+          },
+        });
+      }
+    </script>
+  </body>
+</html>
